@@ -1,8 +1,15 @@
 (ns adventofcode.day2
   (:require [clojure.string :as str]))
 
+(defn to-delta [direction]
+  (condp = direction
+    :L [-1 0]
+    :R [1 0]
+    :U [0 1]
+    :D [0 -1]))
+
 (defn parse-line [line]
-  (map (comp keyword str) line))
+  (map (comp to-delta keyword str) line))
 
 (def input (->> (slurp "resources/day2_input")
                 str/split-lines
@@ -13,17 +20,8 @@
    [0 1] 4 [1 1] 5 [2 1] 6
    [0 0] 7 [1 0] 8 [2 0] 9})
 
-(defn to-delta [direction]
-  (condp = direction
-    :L [-1 0]
-    :R [1 0]
-    :U [0 1]
-    :D [0 -1]))
-
-(defn move [[x y] direction]
-  (let [mvmt (to-delta direction)
-        new-place [(+ x (first mvmt))
-                   (+ y (second mvmt))]]
+(defn move [[x y] [dx dy]]
+  (let [new-place [(+ x dx) (+ y dy)]]
     (for [coord new-place]
       (cond
         (> coord 2) 2
@@ -44,10 +42,8 @@
    [-1 -1] \A [0 -1] \B [1 -1] \C
    [0 -2] \D})
 
-(defn move2 [[x y] direction]
-  (let [mvmt (to-delta direction)
-        new-place [(+ x (first mvmt))
-                   (+ y (second mvmt))]]
+(defn move2 [[x y] [dx dy]]
+  (let [new-place [(+ x dx) (+ y dy)]]
     (if (> (apply + (map #(Math/abs %) new-place)) 2)
       [x y]
       new-place)))
