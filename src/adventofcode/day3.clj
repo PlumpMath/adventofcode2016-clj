@@ -13,3 +13,15 @@
        (> (+ c a) b)))
 
 (count (filter triangle? input))
+
+
+;; Part 2
+
+(def vertically-grouped
+  (reduce (fn [acc triplet]
+            (concat acc (for [i (range 3)]
+                          (map #(nth % i) triplet))))
+          '()
+          (partition 3 input)))
+
+(count (filter triangle? vertically-grouped))
