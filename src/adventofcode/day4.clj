@@ -12,16 +12,16 @@
                 str/split-lines
                 (map parse-line)))
 
-(defn hash [name]
+(defn hash-room [name]
   (->> (frequencies name)
        (sort-by key)
        (sort-by #(get % 1) >)
-       (map first)
+       (map key)
        (take 5)
        str/join))
 
 (defn real? [{:keys [name chsum]}]
-  (= (hash name) chsum))
+  (= (hash-room name) chsum))
 
 (defn check [{:keys [id] :as room}]
   (if (real? room) id 0))
