@@ -13,3 +13,6 @@
          123))
   (is (= (check (parse-line "aabbzzccc123[cbaz]"))
          0)))
+
+(deftest decypher-test
+  (is (= (decypher {:name "qzmtzixmtkozyivhz" :id 343}))))

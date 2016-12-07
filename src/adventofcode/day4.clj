@@ -27,3 +27,22 @@
   (if (real? room) id 0))
 
 (apply + (map check input))
+
+;; Part 2
+
+(def real-rooms (filter real? input))
+
+(def alphabet "abcdefghijklmnopqrstuvwxyz")
+
+(defn decypher [{:keys [name id] :as room}]
+  (let [idxs (for [l name] (get (zipmap alphabet (range)) l))
+        rotated (map (partial + id) idxs)]
+    (assoc room :cypher
+           (str/join (for [i rotated]
+                       (nth (cycle alphabet) i))))))
+
+(->> real-rooms
+     (map decypher)
+     (map #(when (re-find #"northpole" (:cypher %))
+             ((juxt :cypher :id) %)))
+     (remove nil?))

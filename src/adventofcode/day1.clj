@@ -51,13 +51,6 @@
      (map #(Math/abs %))
      (apply +))
 
-(->> (reduce move-in-single-steps
-             {:loc [0 0] :facing :north}
-             input-stream)
-     :loc
-     (map #(Math/abs %))
-     (apply +))
-
 ;; Part 2
 (def path (map :loc (reductions move-in-single-steps
                                 {:loc [0 0] :facing :north}
