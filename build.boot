@@ -5,7 +5,8 @@
           :source-paths   #{"test"}
           :dependencies   '[[org.clojure/clojure "RELEASE"]
                             [adzerk/boot-test "RELEASE" :scope "test"]
-                            [org.clojure/core.match "0.3.0-alpha4"]])
+                            [org.clojure/core.match "0.3.0-alpha4"]
+                            [digest "1.4.5"]])
 
 (task-options!
  pom {:project     project
