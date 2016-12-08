@@ -45,7 +45,7 @@
     :rotate-col (rotate-col m coords)
     :rotate-row (rotate-row m coords)))
 
-(defn swipe [screen instructions]
+(defn swipe-card [screen instructions]
   (reduce draw screen instructions))
 
 ;; Part 2
@@ -62,4 +62,4 @@
          (map str/join)
          (map println))))
 
-(print-screen (swipe blank-screen input))
+(print-screen (swipe-card blank-screen input))
