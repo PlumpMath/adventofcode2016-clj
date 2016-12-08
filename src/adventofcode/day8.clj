@@ -2,9 +2,7 @@
   (:require [clojure.string :as str]))
 
 (defn parse [line]
-  (let [nums (->> line
-                  (re-seq #"\d+")
-                  (map read-string))]
+  (let [nums (map read-string (re-seq #"\d+" line))]
     (cond
       (.startsWith line "rect") [:rect nums]
       (.startsWith line "rotate row") [:rotate-row nums]
@@ -14,8 +12,7 @@
                 str/split-lines
                 (map parse)))
 
-(def blank-screen
-  (vec (repeat 6 (vec (repeat 50 :off)))))
+(def blank-screen (vec (repeat 6 (vec (repeat 50 :off)))))
 
 (defn rect [screen [n-col n-row]]
   (reduce (fn [m coord]
