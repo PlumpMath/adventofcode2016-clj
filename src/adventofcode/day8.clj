@@ -51,13 +51,14 @@
 ;; Part 2
 
 (defn print-screen [screen]
-  (let [pixels (flatten screen)]
+  (let [pixels (flatten screen)
+        width (count (first screen))]
     (println (count (filter #{:on} pixels)))
     (->> pixels
          (map #(case %
                  :on "#"
                  :off " "))
-         (partition 50)
+         (partition width)
          (map str/join)
          (map println))))
 
