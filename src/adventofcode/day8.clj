@@ -39,11 +39,11 @@
       (rotate-row [col n])
       transpose))
 
-(defn draw [m [instruction coords]]
+(defn draw [screen [instruction coords]]
   (case instruction
-    :rect (rect m coords)
-    :rotate-col (rotate-col m coords)
-    :rotate-row (rotate-row m coords)))
+    :rect (rect screen coords)
+    :rotate-col (rotate-col screen coords)
+    :rotate-row (rotate-row screen coords)))
 
 (defn swipe-card [screen instructions]
   (reduce draw screen instructions))
