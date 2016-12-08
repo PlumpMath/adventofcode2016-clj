@@ -4,8 +4,7 @@
 (defn parse-ip
   [ip]
   (let [xs (str/split ip #"[\[\]]")
-        supernet (map #(if (even? (.indexOf xs %))))
-        #_(for [i (range 0 (count xs) 2)] (get xs i))
+        supernet (for [i (range 0 (count xs) 2)] (get xs i))
         hypernet (for [i (range 1 (count xs) 2)] (get xs i))]
     {:supernet supernet :hypernet hypernet}))
 
